@@ -1,0 +1,18 @@
+FROM composer
+
+ENV COMPOSER_HOME /composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+ARG HTTP_PROXY
+ENV HTTP_PROXY "${HTTP_PROXY}"
+
+COPY ./composer/auth.json /composer/auth.json
+
+ARG GITHUB_OAUTH
+RUN sed -i.bak "s|GITHUB_OAUTH|${GITHUB_OAUTH}|g" /composer/auth.json
+
+ARG USER_ID
+
+RUN chown -R $USER_ID $COMPOSER_HOME
+
+USER $USER_ID
