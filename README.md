@@ -45,3 +45,14 @@ Crie um token de acesso pessoal no [Git Hub](https://github.com/settings/tokens/
 
     docker-compose run --rm php php /tests/requirements.php
 > **Nota:** O script de testes foi extraído da imagem oficial do Yii2 em [https://github.com/yiisoft/yii2-docker/tree/master/tests](https://github.com/yiisoft/yii2-docker/tree/master/tests)
+
+## Commands
+Verificar onde estou na estrutura com o composer
+´´´bash
+$ docker-compose run composer ls
+´´´
+
+Executar o composer. (-working-dir=basic determina em qual pasta da sua estrutura você irá executar o comando)
+´´´bash
+$ docker-compose run composer update --working-dir=basic
+´´´
