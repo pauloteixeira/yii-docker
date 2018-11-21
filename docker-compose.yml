@@ -1,6 +1,5 @@
-version: '3'
+version: '2'
 services:
-
   nginx:
     container_name: server_nginx
     image: nginx
@@ -11,21 +10,21 @@ services:
       - ./src/nginx/conf/app.conf:/etc/nginx/conf.d/app.conf
     links:
       - php
-
+      
   php:
     container_name: server_php
     build:
       context: ./src/php-fpm
       args:
         USER_ID: ${USER_ID}
-        DIR_BASE_YII: ${DIR_BASE_YII}
     environment:
       HTTP_PROXY: ${HTTP_PROXY}
     volumes:
       - ./src/www:/var/www
       - ./src/php-fpm/log:/var/log/php-fpm/
-      - ./src/tests:/tests:delegated
-
+    expose:
+      - "9000"
+      
   composer:
     container_name: server_composer
     build:
